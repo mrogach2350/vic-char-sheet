@@ -2,53 +2,18 @@
   <v-container>
     <v-row>
       <v-col cols="6">
-        <v-card>
-          <v-card-title>Basic Info</v-card-title>
-          <v-card-text>
-            <v-text-field
-              outlined
-              label="Name"
-            ></v-text-field>
-            <v-text-field
-              outlined
-              label="Gender"
-            ></v-text-field>
-            <v-text-field
-              outlined
-              label="Age"
-              type="number"
-              suffix=" years old"
-            ></v-text-field>
-            <v-text-field
-              outlined
-              label="Lineage"
-            ></v-text-field>
-            <v-text-field
-              outlined
-              label="Alignment"
-            ></v-text-field>
-            <v-textarea
-              rows="3"
-              outlined
-              label="Physical Description"
-            ></v-textarea>
-          </v-card-text>
-        </v-card>
+        <basic-info :data="characterData.basicInfo"></basic-info>
       </v-col>
       <v-col cols="6">
         <v-card>
           <v-card-title>Ability Scores</v-card-title>
           <v-card-text>
-            <v-textarea
-              rows="3"
-              outlined
-              label="Physical Description"
-            ></v-textarea>
+            <ability-scores :data="characterData.abilityScores"></ability-scores>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
+    <!-- <v-row>
       <v-col cols="6">
         <v-card>
           <v-card-title>Level Up Choices</v-card-title>
@@ -62,12 +27,59 @@
           <v-card-title>Abilities</v-card-title>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 
 <script>
+import BasicInfo from "@/components/BasicInfo.vue";
+import AbilityScores from "@/components/AbilityScores.vue";
 export default {
-  name: "Home"
+  components: { BasicInfo, AbilityScores },
+  name: "Home",
+  data: () => ({
+    characterData: {
+      basicInfo: {
+        name: "",
+        gender: "",
+        age: 0,
+        lineage: "",
+        alignment: "",
+        physicalDescription: "",
+      },
+      abilityScores: {
+        str: {
+          featBonus: 0,
+          lineageBonus: 0,
+          baseValue: 0,
+        },
+        dex: {
+          featBonus: 0,
+          lineageBonus: 0,
+          baseValue: 0,
+        },
+        con: {
+          featBonus: 0,
+          lineageBonus: 0,
+          baseValue: 0,
+        },
+        int: {
+          featBonus: 0,
+          lineageBonus: 0,
+          baseValue: 0,
+        },
+        wis: {
+          featBonus: 0,
+          lineageBonus: 0,
+          baseValue: 0,
+        },
+        cha: {
+          featBonus: 0,
+          lineageBonus: 0,
+          baseValue: 0,
+        },
+      },
+    },
+  }),
 };
 </script>

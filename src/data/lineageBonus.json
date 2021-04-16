@@ -1,0 +1,137 @@
+{
+  "Dragonborn": {
+    "STR": 2,
+    "DEX": "",
+    "CON": "",
+    "INT": "",
+    "WIS": "",
+    "CHA": 1,
+    "Special": ""
+  },
+  "Dwarf - Hill": {
+    "STR": "",
+    "DEX": "",
+    "CON": 2,
+    "INT": "",
+    "WIS": 1,
+    "CHA": "",
+    "Special": ""
+  },
+  "Dwarf - Mountain": {
+    "STR": 2,
+    "DEX": "",
+    "CON": 2,
+    "INT": "",
+    "WIS": "",
+    "CHA": "",
+    "Special": ""
+  },
+  "Elf - Drow": {
+    "STR": "",
+    "DEX": 2,
+    "CON": "",
+    "INT": "",
+    "WIS": "",
+    "CHA": 1,
+    "Special": ""
+  },
+  "Elf - High": {
+    "STR": "",
+    "DEX": 2,
+    "CON": "",
+    "INT": 1,
+    "WIS": "",
+    "CHA": "",
+    "Special": ""
+  },
+  "Elf - Wood": {
+    "STR": "",
+    "DEX": 2,
+    "CON": "",
+    "INT": "",
+    "WIS": 1,
+    "CHA": "",
+    "Special": ""
+  },
+  "Gnome - Forest": {
+    "STR": "",
+    "DEX": 1,
+    "CON": "",
+    "INT": 2,
+    "WIS": "",
+    "CHA": "",
+    "Special": ""
+  },
+  "Gnome - Rock": {
+    "STR": "",
+    "DEX": "",
+    "CON": 1,
+    "INT": 2,
+    "WIS": "",
+    "CHA": "",
+    "Special": ""
+  },
+  "Half-Elf": {
+    "STR": "___",
+    "DEX": "___",
+    "CON": "___",
+    "INT": "___",
+    "WIS": "___",
+    "CHA": 2,
+    "Special": "Two +1's"
+  },
+  "Half-Orc": {
+    "STR": 2,
+    "DEX": "",
+    "CON": 1,
+    "INT": "",
+    "WIS": "",
+    "CHA": "",
+    "Special": ""
+  },
+  "Halfling - Lightfoot": {
+    "STR": "",
+    "DEX": 2,
+    "CON": "",
+    "INT": "",
+    "WIS": "",
+    "CHA": 1,
+    "Special": ""
+  },
+  "Halfling - Stout": {
+    "STR": "",
+    "DEX": 2,
+    "CON": 1,
+    "INT": "",
+    "WIS": "",
+    "CHA": "",
+    "Special": ""
+  },
+  "Human - Standard": {
+    "STR": 1,
+    "DEX": 1,
+    "CON": 1,
+    "INT": 1,
+    "WIS": 1,
+    "CHA": 1,
+    "Special": ""
+  },
+  "Human - Variant": {
+    "STR": "___",
+    "DEX": "___",
+    "CON": "___",
+    "INT": "___",
+    "WIS": "___",
+    "CHA": "___",
+    "Special": "Two +1's"
+  },
+  "Tiefling": {
+    "STR": "",
+    "DEX": "",
+    "CON": "",
+    "INT": 1,
+    "WIS": "",
+    "CHA": 2,
+    "Special": ""
+  }
+}
