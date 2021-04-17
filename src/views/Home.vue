@@ -46,6 +46,7 @@
 <script>
 import BasicInfo from "@/components/BasicInfo.vue";
 import AbilityScores from "@/components/AbilityScores.vue";
+import { db } from '@/main.js'
 export default {
   components: { BasicInfo, AbilityScores },
   name: "Home",
@@ -94,11 +95,21 @@ export default {
     },
   }),
   methods: {
-    getFormData() {
+    async getFormData() {
       const basicInfo = this.$refs.basicInfo.formData;
-      const abilityScores = this.$refs.abilityScores.items;
-      console.log("basicInfo: ", basicInfo);
-      console.log("abilityScores: ", abilityScores);
+      const [str, dex, con, int, wis, cha] = this.$refs.abilityScores.items;
+      await db.collection("characters").add({
+        basicInfo,
+        abilityScores: {
+          str,
+          dex,
+          con,
+          int,
+          wis,
+          cha,
+        },
+      });
+      this.$router.push('/list')
     },
   },
 };
