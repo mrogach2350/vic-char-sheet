@@ -72,11 +72,11 @@
     "Special": ""
   },
   "Half-Elf": {
-    "STR": "___",
-    "DEX": "___",
-    "CON": "___",
-    "INT": "___",
-    "WIS": "___",
+    "STR": "",
+    "DEX": "",
+    "CON": "",
+    "INT": "",
+    "WIS": "",
     "CHA": 2,
     "Special": "Two +1's"
   },
@@ -117,12 +117,12 @@
     "Special": ""
   },
   "Human - Variant": {
-    "STR": "___",
-    "DEX": "___",
-    "CON": "___",
-    "INT": "___",
-    "WIS": "___",
-    "CHA": "___",
+    "STR": "",
+    "DEX": "",
+    "CON": "",
+    "INT": "",
+    "WIS": "",
+    "CHA": "",
     "Special": "Two +1's"
   },
   "Tiefling": {

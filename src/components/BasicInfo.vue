@@ -33,6 +33,7 @@
         outlined
         label="Lineage"
         :items="lineageOptions"
+        @input="(event) => updateValue('lineage', event)"
       ></v-select>
       <v-textarea
         v-model="formData.physicalDescription"
@@ -45,18 +46,18 @@
 </template>
 
 <script>
-import isEmpty from 'lodash/isEmpty'
+import isEmpty from "lodash/isEmpty";
 export default {
   name: "BasicInfo",
   props: {
     basicInfo: {
       type: Object,
-      default: {}
+      default: {},
     },
   },
   mounted() {
     if (!isEmpty(this.basicInfo)) {
-      this.formData = {...this.basicInfo}
+      this.formData = { ...this.basicInfo };
     }
   },
   data: () => ({
@@ -99,6 +100,11 @@ export default {
       "TN",
     ],
   }),
+  methods: {
+    updateValue(name, value) {
+      this.$emit("updateValue", name, value);
+    },
+  },
 };
 </script>
 

@@ -10,19 +10,15 @@
         <basic-info
           ref="basicInfo"
           :basicInfo="characterData.basicInfo"
+          @updateValue="handleUpdateValue"
         ></basic-info>
       </v-col>
       <v-col cols="6">
-        <v-card>
-          <v-card-title>Ability Scores</v-card-title>
-          <v-card-text>
-            <ability-scores
-              ref="abilityScores"
-              :lineage="characterData.basicInfo.lineage"
-              :abilityScores="characterData.abilityScores"
-            ></ability-scores>
-          </v-card-text>
-        </v-card>
+        <ability-scores
+          ref="abilityScores"
+          :lineage="selectedLineage"
+          :abilityScores="characterData.abilityScores"
+        ></ability-scores>
       </v-col>
     </v-row>
     <!-- <v-row>
@@ -46,11 +42,12 @@
 <script>
 import BasicInfo from "@/components/BasicInfo.vue";
 import AbilityScores from "@/components/AbilityScores.vue";
-import { db } from '@/main.js'
+import { db } from "@/main.js";
 export default {
   components: { BasicInfo, AbilityScores },
   name: "Home",
   data: () => ({
+    selectedLineage: "",
     characterData: {
       basicInfo: {
         name: "",
@@ -107,9 +104,16 @@ export default {
           int,
           wis,
           cha,
+          bonusPoint1: this.$refs.abilityScores.bonusPoint1,
+          bonusPoint2: this.$refs.abilityScores.bonusPoint2
         },
       });
-      this.$router.push('/list')
+      this.$router.push("/list");
+    },
+    handleUpdateValue(name, value) {
+      if (name === "lineage") {
+        this.selectedLineage = value;
+      }
     },
   },
 };

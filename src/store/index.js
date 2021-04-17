@@ -23,6 +23,9 @@ export default new Vuex.Store({
       commit('CLEAR_STORE')
     }
   },
+  getters: {
+    getAllCharacters: (state) => state.characters
+  },
   modules: {
   }
 })
