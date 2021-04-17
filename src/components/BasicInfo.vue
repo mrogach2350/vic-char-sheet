@@ -45,8 +45,20 @@
 </template>
 
 <script>
+import isEmpty from 'lodash/isEmpty'
 export default {
   name: "BasicInfo",
+  props: {
+    basicInfo: {
+      type: Object,
+      default: {}
+    },
+  },
+  mounted() {
+    if (!isEmpty(this.basicInfo)) {
+      this.formData = {...this.basicInfo}
+    }
+  },
   data: () => ({
     formData: {
       name: "",

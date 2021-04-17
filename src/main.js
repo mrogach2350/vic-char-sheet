@@ -23,12 +23,14 @@ firebase.auth().signInAnonymously()
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    console.log('log user in: ', user)
+    store.dispatch('bindCharacters')
     firebase.firestore().collection('test').doc('hello').set({ success: true })
   } else {
-    console.log('log user out')
+    store.dispatch('clearStore')
   }
 });
+
+const db = firebase.firestore()
 
 Vue.config.productionTip = false
 
@@ -38,3 +40,7 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+export {
+  db
+}

@@ -20,9 +20,36 @@
 </template>
 
 <script>
+import isEmpty from 'lodash/isEmpty'
 import { costConverter } from "@/utils/abilityCalculatorUtils.js";
 export default {
   name: "AbilityScores",
+  props: {
+    abilityScores: {
+      type: Object,
+      default: {}
+    }
+  },
+  mounted() {
+    if(!isEmpty(this.abilityScores)) {
+      Object.entries(this.abilityScores).forEach(([name, values]) => {
+        switch(name) {
+          case 'str':
+            Object.assign(this.items[0], values)
+          case 'dex':
+            Object.assign(this.items[1], values)
+          case 'con':
+            Object.assign(this.items[2], values)
+          case 'int':
+            Object.assign(this.items[3], values)
+          case 'wis':
+            Object.assign(this.items[4], values)
+          case 'cha':
+            Object.assign(this.items[5], values)
+        }
+      })
+    }
+  },
   data: () => ({
     headers: [
       {
@@ -68,18 +95,19 @@ export default {
         featBonus: 2,
         lineageBonus: 0,
         baseValue: 8,
+
       },
       {
         scoreName: "Dexterity",
         featBonus: 0,
         lineageBonus: 0,
-        baseValue: 9,
+        baseValue: 8,
       },
       {
         scoreName: "Constitution",
         featBonus: 0,
         lineageBonus: 0,
-        baseValue: 13,
+        baseValue: 8,
       },
       {
         scoreName: "Intelligence",
