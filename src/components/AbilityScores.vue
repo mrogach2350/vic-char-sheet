@@ -77,30 +77,30 @@ export default {
       type: String,
       default: "",
     },
-    abilityScores: {
+    str: {
       type: Object,
-      default: {},
+      default: () => ({ featBonus: 0, lineageBonus: 0, baseValue: 8 }),
     },
-  },
-  mounted() {
-    if (!isEmpty(this.abilityScores)) {
-      Object.entries(this.abilityScores).forEach(([name, values]) => {
-        switch (name) {
-          case "str":
-            Object.assign(this.items[0], values);
-          case "dex":
-            Object.assign(this.items[1], values);
-          case "con":
-            Object.assign(this.items[2], values);
-          case "int":
-            Object.assign(this.items[3], values);
-          case "wis":
-            Object.assign(this.items[4], values);
-          case "cha":
-            Object.assign(this.items[5], values);
-        }
-      });
-    }
+    dex: {
+      type: Object,
+      default: () => ({ featBonus: 0, lineageBonus: 0, baseValue: 8 }),
+    },
+    con: {
+      type: Object,
+      default: () => ({ featBonus: 0, lineageBonus: 0, baseValue: 8 }),
+    },
+    int: {
+      type: Object,
+      default: () => ({ featBonus: 0, lineageBonus: 0, baseValue: 8 }),
+    },
+    wis: {
+      type: Object,
+      default: () => ({ featBonus: 0, lineageBonus: 0, baseValue: 8 }),
+    },
+    cha: {
+      type: Object,
+      default: () => ({ featBonus: 0, lineageBonus: 0, baseValue: 8 }),
+    },
   },
   data: () => ({
     bonusPoint1: 0,
@@ -144,44 +144,6 @@ export default {
         sortable: false,
       },
     ],
-    items: [
-      {
-        scoreName: "Strength",
-        featBonus: 2,
-        lineageBonus: 0,
-        baseValue: 8,
-      },
-      {
-        scoreName: "Dexterity",
-        featBonus: 0,
-        lineageBonus: 0,
-        baseValue: 8,
-      },
-      {
-        scoreName: "Constitution",
-        featBonus: 0,
-        lineageBonus: 0,
-        baseValue: 8,
-      },
-      {
-        scoreName: "Intelligence",
-        featBonus: 0,
-        lineageBonus: 0,
-        baseValue: 8,
-      },
-      {
-        scoreName: "Wisdom",
-        featBonus: 0,
-        lineageBonus: 0,
-        baseValue: 8,
-      },
-      {
-        scoreName: "Charisma",
-        featBonus: 0,
-        lineageBonus: 0,
-        baseValue: 8,
-      },
-    ],
     bonusAbilityOptions: [
       "Strength",
       "Dexterity",
@@ -200,6 +162,52 @@ export default {
         return agg;
       }, 0);
       return totalPoints - pointCost;
+    },
+    items() {
+      return [
+        {
+          id: "str",
+          scoreName: "Strength",
+          featBonus: this.str.featBonus,
+          lineageBonus: this.str.lineageBonus,
+          baseValue: this.str.baseValue,
+        },
+        {
+          id: "dex",
+          scoreName: "Dexterity",
+          featBonus: this.dex.featBonus,
+          lineageBonus: this.dex.lineageBonus,
+          baseValue: this.dex.baseValue,
+        },
+        {
+          id: "con",
+          scoreName: "Constitution",
+          featBonus: this.con.featBonus,
+          lineageBonus: this.con.lineageBonus,
+          baseValue: this.con.baseValue,
+        },
+        {
+          id: "int",
+          scoreName: "Intelligence",
+          featBonus: this.int.featBonus,
+          lineageBonus: this.int.lineageBonus,
+          baseValue: this.int.baseValue,
+        },
+        {
+          id: "wis",
+          scoreName: "Wisdom",
+          featBonus: this.wis.featBonus,
+          lineageBonus: this.wis.lineageBonus,
+          baseValue: this.wis.baseValue,
+        },
+        {
+          id: "cha",
+          scoreName: "Charisma",
+          featBonus: this.cha.featBonus,
+          lineageBonus: this.cha.lineageBonus,
+          baseValue: this.cha.baseValue,
+        },
+      ];
     },
   },
   watch: {
@@ -233,26 +241,7 @@ export default {
         if (value === 15) return;
         newValue = value + 1;
       }
-      switch (name) {
-        case "Strength":
-          this.items[0].baseValue = newValue;
-          break;
-        case "Dexterity":
-          this.items[1].baseValue = newValue;
-          break;
-        case "Constitution":
-          this.items[2].baseValue = newValue;
-          break;
-        case "Intelligence":
-          this.items[3].baseValue = newValue;
-          break;
-        case "Wisdom":
-          this.items[4].baseValue = newValue;
-          break;
-        case "Charisma":
-          this.items[5].baseValue = newValue;
-          break;
-      }
+      this.$emit("updateValue", name, newValue);
     },
     updateLineageBonus([name, newValue]) {
       switch (name) {
@@ -297,7 +286,7 @@ export default {
         total += 1;
       }
       return total;
-    }
+    },
   },
 };
 </script>

@@ -3,18 +3,21 @@
     <v-card-title>Basic Info</v-card-title>
     <v-card-text>
       <v-text-field
-        v-model="formData.name"
+        @input="(value) => updateValue('name', value)"
+        :value="name"
         outlined
         label="Name"
       ></v-text-field>
       <v-text-field
-        v-model="formData.gender"
+        @input="(value) => updateValue('gender', value)"
+        :value="gender"
         outlined
         label="Gender"
       ></v-text-field>
       <div class="d-flex">
         <v-text-field
-          v-model="formData.age"
+          @input="(value) => updateValue('age', value)"
+          :value="age"
           outlined
           label="Age"
           type="number"
@@ -22,21 +25,23 @@
           class="mr-3"
         ></v-text-field>
         <v-select
-          v-model="formData.alignment"
+          @input="value => updateValue('alignment', value)"
+        :value="alignment"
           outlined
           label="Alignment"
           :items="alignmentOptions"
         ></v-select>
       </div>
       <v-select
-        v-model="formData.lineage"
+        @input="value => updateValue('lineage', value)"
+        :value="lineage"
         outlined
         label="Lineage"
         :items="lineageOptions"
-        @input="(event) => updateValue('lineage', event)"
       ></v-select>
       <v-textarea
-        v-model="formData.physicalDescription"
+        @input="value => updateValue('physicalDescription', value)"
+        :value="physicalDescription"
         rows="3"
         outlined
         label="Physical Description"
@@ -49,26 +54,20 @@
 import isEmpty from "lodash/isEmpty";
 export default {
   name: "BasicInfo",
-  props: {
-    basicInfo: {
-      type: Object,
-      default: {},
-    },
-  },
+  props: [
+    "name",
+    "gender",
+    "age",
+    "lineage",
+    "alignment",
+    "physicalDescription",
+  ],
   mounted() {
     if (!isEmpty(this.basicInfo)) {
       this.formData = { ...this.basicInfo };
     }
   },
   data: () => ({
-    formData: {
-      name: "",
-      gender: "",
-      age: null,
-      lineage: null,
-      alignment: null,
-      physicalDescription: "",
-    },
     lineageOptions: [
       { text: "--none--", value: null },
       "Dragonborn",

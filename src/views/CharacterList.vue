@@ -1,50 +1,62 @@
 <template>
   <v-container>
-    <v-data-table :headers="headers" :items="allCharacters"></v-data-table>
+    <v-data-table
+      :headers="headers"
+      :items="allCharacters"
+      @click:row="({ id }) => $router.push(`/list/${id}`)"
+    ></v-data-table>
   </v-container>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-  name: 'CharacterListView',
+  name: "CharacterListView",
   data: () => ({
     headers: [
       {
         text: "Name",
         value: "name",
         align: "start",
-        sortable: false,
       },
       {
         text: "Age",
         value: "age",
         align: "start",
-        sortable: false,
       },
       {
         text: "Alignment",
         value: "alignment",
         align: "start",
-        sortable: false,
       },
       {
         text: "Lineage",
         value: "lineage",
         align: "start",
-        sortable: false,
       },
-    ]
+      {
+        text: "Id",
+        value: "id",
+        align: " d-none",
+      },
+    ],
   }),
   computed: {
-    ...mapGetters(['getAllCharacters']),
+    ...mapGetters(["getAllCharacters"]),
     allCharacters() {
-      return this.getAllCharacters.map(record => ({...record.basicInfo}))
-    }
-  }
-}
+      return this.getAllCharacters.map((record) => ({
+        ...record,
+        id: record.id,
+      }));
+    },
+  },
+  methods: {
+    handleCharacterSelect(val) {
+      console.log("val: ", val);
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

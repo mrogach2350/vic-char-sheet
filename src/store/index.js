@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { vuexfireMutations, firestoreAction  } from 'vuexfire'
+import { vuexfireMutations, firestoreAction } from 'vuexfire'
 import { db } from '@/main.js'
 Vue.use(Vuex)
 
@@ -16,7 +16,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    bindCharacters: firestoreAction(({ bindFirestoreRef  }) => {
+    bindCharacters: firestoreAction(({ bindFirestoreRef }) => {
       return bindFirestoreRef('characters', db.collection('characters'))
     }),
     clearStore: ({ commit }) => {
@@ -24,7 +24,8 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getAllCharacters: (state) => state.characters
+    getAllCharacters: (state) => state.characters,
+    getCharacterById: state => id => state.characters.find(x => x.id === id) || {}
   },
   modules: {
   }

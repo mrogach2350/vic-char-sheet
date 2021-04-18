@@ -1,23 +1,32 @@
 <template>
   <v-container>
     <div class="d-flex justify-end mb-3">
-      <v-btn @click="getFormData" color="green" v-if="$route.path === '/'">
-        Save Character
-      </v-btn>
+      <v-btn @click="getFormData" color="green"> Save Character </v-btn>
     </div>
     <v-row>
       <v-col cols="6">
         <basic-info
           ref="basicInfo"
-          :basicInfo="characterData.basicInfo"
           @updateValue="handleUpdateValue"
+          :name="characterData.name"
+          :gender="characterData.gender"
+          :age="characterData.age"
+          :lineage="characterData.lineage"
+          :alignment="characterData.alignment"
+          :physicalDescription="characterData.physicalDescription"
         ></basic-info>
       </v-col>
       <v-col cols="6">
         <ability-scores
           ref="abilityScores"
-          :lineage="selectedLineage"
-          :abilityScores="characterData.abilityScores"
+          @updateValue="handleUpdateValue"
+          :lineage="characterData.lineage"
+          :str="characterData.str"
+          :dex="characterData.dex"
+          :con="characterData.con"
+          :int="characterData.int"
+          :wis="characterData.wis"
+          :cha="characterData.cha"
         ></ability-scores>
       </v-col>
     </v-row>
@@ -47,72 +56,110 @@ export default {
   components: { BasicInfo, AbilityScores },
   name: "Home",
   data: () => ({
-    selectedLineage: "",
-    characterData: {
-      basicInfo: {
-        name: "",
-        gender: "",
-        age: 0,
-        lineage: "",
-        alignment: "",
-        physicalDescription: "",
-      },
-      abilityScores: {
-        str: {
-          featBonus: 0,
-          lineageBonus: 0,
-          baseValue: 8,
-        },
-        dex: {
-          featBonus: 0,
-          lineageBonus: 0,
-          baseValue: 8,
-        },
-        con: {
-          featBonus: 0,
-          lineageBonus: 0,
-          baseValue: 8,
-        },
-        int: {
-          featBonus: 0,
-          lineageBonus: 0,
-          baseValue: 8,
-        },
-        wis: {
-          featBonus: 0,
-          lineageBonus: 0,
-          baseValue: 8,
-        },
-        cha: {
-          featBonus: 0,
-          lineageBonus: 0,
-          baseValue: 8,
-        },
+    characterData: {},
+  }),
+  watch: {
+    "$route.params": {
+      immediate: true,
+      deep: true,
+      handler(cur) {
+        if (cur && cur.id) {
+          const charDetails = this.$store.getters.getCharacterById(cur.id);
+          this.characterData = { ...charDetails };
+        } else {
+          this.characterData = {
+            name: "",
+            gender: "",
+            age: 0,
+            lineage: null,
+            alignment: null,
+            physicalDescription: "",
+            str: {
+              featBonus: 0,
+              lineageBonus: 0,
+              baseValue: 8,
+            },
+            dex: {
+              featBonus: 0,
+              lineageBonus: 0,
+              baseValue: 8,
+            },
+            con: {
+              featBonus: 0,
+              lineageBonus: 0,
+              baseValue: 8,
+            },
+            int: {
+              featBonus: 0,
+              lineageBonus: 0,
+              baseValue: 8,
+            },
+            wis: {
+              featBonus: 0,
+              lineageBonus: 0,
+              baseValue: 8,
+            },
+            cha: {
+              featBonus: 0,
+              lineageBonus: 0,
+              baseValue: 8,
+            },
+          };
+        }
       },
     },
-  }),
+  },
   methods: {
     async getFormData() {
-      const basicInfo = this.$refs.basicInfo.formData;
-      const [str, dex, con, int, wis, cha] = this.$refs.abilityScores.items;
       await db.collection("characters").add({
-        basicInfo,
-        abilityScores: {
-          str,
-          dex,
-          con,
-          int,
-          wis,
-          cha,
-          bonusPoint1: this.$refs.abilityScores.bonusPoint1,
-          bonusPoint2: this.$refs.abilityScores.bonusPoint2
-        },
+        ...this.characterData,
       });
       this.$router.push("/list");
     },
     handleUpdateValue(name, value) {
-      if (name === "lineage") {
-        this.selectedLineage = value;
+      switch (name) {
+        case "name":
+          this.characterData.name = value;
+          break;
+        case "gender":
+          this.characterData.gender = value;
+          break;
+        case "age":
+          this.characterData.age = value;
+          break;
+        case "lineage":
+          this.characterData.lineage = value;
+          break;
+        case "alignment":
+          this.characterData.alignment = value;
+          break;
+        case "physicalDescription":
+          this.characterData.physicalDescription = value;
+          break;
+        case "Strength":
+          this.characterData.str.baseValue = value;
+          break;
+        case "Dexterity":
+          this.characterData.dex.baseValue = value;
+          break;
+        case "Constitution":
+          this.characterData.con.baseValue = value;
+          break;
+        case "Intelligence":
+          this.characterData.int.baseValue = value;
+          break;
+        case "Wisdom":
+          this.characterData.wis.baseValue = value;
+          break;
+        case "Charisma":
+          console.log("name: ", name);
+          console.log("value: ", value);
+          console.log(
+            "this.characterData.cha: ",
+            this.characterData.cha.baseValue
+          );
+          this.characterData.cha.baseValue = value;
+          break;
       }
     },
   },

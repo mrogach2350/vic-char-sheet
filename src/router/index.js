@@ -12,6 +12,11 @@ const routes = [
     component: Home
   },
   {
+    path: '/list/:id',
+    name: 'Home',
+    component: Home
+  },
+  {
     path: '/list',
     name: 'CharacterList',
     component: CharacterList
